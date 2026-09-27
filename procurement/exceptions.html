@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exception Scenarios | Sri Varahi ERP</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+:root{
+--red:#B22222;
+--green:#1E5A33;
+--gold:#C89A2B;
+--cream:#F8F6F1;
+--sidebar:#0F2C1E;
+--sidebar2:#143524;
+--border:#E6DED2;
+--green-light:#DDE9D9;
+--text:#222;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body{background:var(--cream);overflow:hidden;color:var(--text);}
+
+/* HEADER */
+
+.header{
+height:82px;
+background:white;
+border-bottom:3px solid var(--gold);
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:12px 24px;
+}
+
+.brand{display:flex;align-items:center;gap:15px;}
+.logo{width:72px;height:72px;object-fit:contain;}
+
+.brand h1{
+font-family:Merriweather,serif;
+font-size:24px;
+color:var(--red);
+}
+
+.brand p{
+font-size:13px;
+color:var(--green);
+font-weight:600;
+}
+
+.header-right{
+display:flex;
+align-items:center;
+gap:20px;
+}
+
+.avatar{
+width:42px;
+height:42px;
+border-radius:50%;
+background:var(--green);
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-weight:bold;
+}
+
+/* LAYOUT */
+
+.container{
+display:flex;
+height:calc(100vh - 82px);
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:260px;
+background:linear-gradient(180deg,var(--sidebar),var(--sidebar2));
+color:white;
+padding:18px 14px;
+overflow:auto;
+}
+
+.section-title{
+font-size:11px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:#B8C5AE;
+margin:18px 10px 10px;
+}
+
+.menu-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:13px 14px;
+border-radius:12px;
+cursor:pointer;
+margin-bottom:5px;
+transition:.2s;
+}
+
+.menu-item:hover{
+background:rgba(255,255,255,.08);
+}
+
+.menu-item.active{
+background:var(--green-light);
+color:var(--green);
+font-weight:600;
+}
+
+.menu-left{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.submenu{
+padding-left:18px;
+}
+
+.submenu a{
+display:flex;
+align-items:center;
+gap:10px;
+padding:9px 12px;
+margin:3px 0;
+border-radius:8px;
+text-decoration:none;
+color:#E7F0E5;
+font-size:14px;
+}
+
+.submenu a i{
+color:var(--gold);
+font-size:12px;
+width:18px;
+}
+
+.submenu a.active{
+background:rgba(200,154,43,.15);
+border-left:3px solid var(--gold);
+color:white;
+}
+
+.submenu a:hover{
+background:rgba(255,255,255,.08);
+}
+
+.divider{
+height:1px;
+background:rgba(255,255,255,.1);
+margin:12px 8px;
+}
+
+/* CONTENT */
+
+.content{
+flex:1;
+padding:24px;
+overflow:auto;
+}
+
+.breadcrumb{
+font-size:14px;
+color:#777;
+margin-bottom:8px;
+}
+
+.page-title{
+font-size:36px;
+color:var(--red);
+margin-bottom:6px;
+}
+
+.subtitle{
+color:#666;
+margin-bottom:24px;
+}
+
+/* CARD */
+
+.card{
+background:white;
+border-radius:18px;
+padding:22px;
+border:1px solid var(--border);
+margin-bottom:22px;
+box-shadow:0 4px 12px rgba(0,0,0,.05);
+}
+
+.card-title{
+font-size:22px;
+color:var(--green);
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:18px;
+}
+
+.card-title i{
+color:var(--gold);
+}
+
+/* GRID */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:18px;
+}
+
+.box{
+background:#FAFAF8;
+border:1px solid var(--border);
+border-radius:14px;
+padding:18px;
+}
+
+.box h4{
+color:var(--green);
+margin-bottom:10px;
+font-size:16px;
+}
+
+.box p{
+font-size:13px;
+color:#555;
+line-height:1.6;
+}
+
+.box i{
+font-size:24px;
+color:var(--gold);
+margin-bottom:10px;
+display:block;
+}
+
+/* TABLE */
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:12px;
+}
+
+th{
+background:#F5F5F2;
+padding:12px;
+text-align:left;
+font-size:13px;
+}
+
+td{
+padding:12px;
+border-bottom:1px solid #eee;
+font-size:14px;
+}
+
+/* STATUS */
+
+.status{
+padding:5px 10px;
+border-radius:999px;
+font-size:12px;
+font-weight:600;
+display:inline-block;
+}
+
+.green{background:#DFF4E4;color:#166534;}
+.orange{background:#FFF8E1;color:#9A6A00;}
+.red{background:#FFE8E8;color:#B22222;}
+.blue{background:#E8F1FF;color:#1E40AF;}
+
+/* ALERT */
+
+.alert{
+background:#FFF8E1;
+border-left:4px solid var(--gold);
+padding:16px;
+border-radius:10px;
+margin-top:18px;
+}
+
+/* BUTTONS */
+
+.actions{
+display:flex;
+justify-content:flex-end;
+gap:12px;
+flex-wrap:wrap;
+margin-top:22px;
+}
+
+.btn{
+padding:12px 20px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-weight:600;
+}
+
+.primary{background:var(--green);color:white;}
+.secondary{background:white;border:2px solid var(--green);color:var(--green);}
+.gold{background:var(--gold);color:white;}
+.danger{background:var(--red);color:white;}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.sidebar{display:none;}
+.container{display:block;}
+.content{padding:16px;}
+.page-title{font-size:30px;}
+
+.header{padding:10px 14px;}
+
+.logo{
+width:54px;
+height:54px;
+}
+
+.brand h1{
+font-size:17px;
+}
+
+.brand p{
+font-size:11px;
+}
+
+.header-right{
+font-size:12px;
+gap:10px;
+}
+
+.avatar{
+width:36px;
+height:36px;
+}
+
+table{
+display:block;
+overflow-x:auto;
+white-space:nowrap;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+<div class="brand">
+<img src="../logo.png" class="logo">
+<div>
+<h1>SRI VARAHI TOMATO COMMISSION MANDI</h1>
+<p>Wholesale & Retail Sales | Intra & Inter State Sales | Logistics</p>
+</div>
+</div>
+
+<div class="header-right">
+<div><i class="fa-regular fa-calendar"></i> Today</div>
+<div style="display:flex;align-items:center;gap:10px;">
+<div class="avatar">AD</div>
+<div><b>Admin</b><br><small>Head Office</small></div>
+</div>
+</div>
+
+</header>
+
+<div class="container">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+<div class="menu-item" onclick="window.location.href='../index.html'">
+<div class="menu-left"><i class="fa-solid fa-house"></i><span>Dashboard</span></div>
+</div>
+
+<div class="section-title">Modules</div>
+
+<div class="menu-item active">
+<div class="menu-left"><i class="fa-solid fa-truck"></i><span>Procurement</span></div>
+<i class="fa-solid fa-chevron-right" style="transform:rotate(90deg);"></i>
+</div>
+
+<div class="submenu">
+
+<a href="vehicle-entry.html"><i class="fa-solid fa-circle-dot"></i>Vehicle Entry</a>
+<a href="workflow-selection.html"><i class="fa-solid fa-circle-dot"></i>Workflow Selection</a>
+<a href="auction-management.html"><i class="fa-solid fa-circle-dot"></i>Auction Management</a>
+<a href="customer-allocation.html"><i class="fa-solid fa-circle-dot"></i>Customer Allocation</a>
+<a href="draft-bills.html"><i class="fa-solid fa-circle-dot"></i>Draft Bills</a>
+<a href="stock-management.html"><i class="fa-solid fa-circle-dot"></i>Stock Management</a>
+<a href="unsold-stock.html"><i class="fa-solid fa-circle-dot"></i>Unsold Stock</a>
+<a href="allocation-history.html"><i class="fa-solid fa-circle-dot"></i>Allocation History</a>
+<a href="approval.html"><i class="fa-solid fa-circle-dot"></i>Approval</a>
+<a href="whatsapp.html"><i class="fa-brands fa-whatsapp"></i>WhatsApp</a>
+<a href="audit-timeline.html"><i class="fa-solid fa-clock-rotate-left"></i>Audit Timeline</a>
+<a href="exceptions.html" class="active"><i class="fa-solid fa-triangle-exclamation"></i>Exception Scenarios</a>
+
+</div>
+
+<div class="menu-item"><div class="menu-left"><i class="fa-solid fa-file-invoice-dollar"></i><span>Billing</span></div></div>
+<div class="menu-item"><div class="menu-left"><i class="fa-solid fa-wallet"></i><span>Cash Management</span></div></div>
+<div class="menu-item"><div class="menu-left"><i class="fa-solid fa-users"></i><span>Employee Settlement</span></div></div>
+<div class="menu-item"><div class="menu-left"><i class="fa-solid fa-route"></i><span>Transportation</span></div></div>
+<div class="menu-item"><div class="menu-left"><i class="fa-solid fa-chart-column"></i><span>Audit & Accounts</span></div></div>
+
+<div class="divider"></div>
+
+<div class="section-title">System</div>
+<div class="menu-item"><div class="menu-left"><i class="fa-solid fa-gear"></i><span>Settings</span></div></div>
+
+</aside>
+
+<!-- CONTENT -->
+
+<main class="content">
+
+<div class="breadcrumb">
+Dashboard / Procurement / Exception Scenarios
+</div>
+
+<h2 class="page-title">Exception Handling Center</h2>
+
+<p class="subtitle">
+Handle real-world mandi situations without breaking the procurement workflow.
+</p>
+
+<!-- QUICK STATUS -->
+
+<div class="card">
+
+<div class="card-title">
+<i class="fa-solid fa-circle-info"></i>
+Today's Exceptions
+</div>
+
+<div class="grid">
+
+<div class="box">
+<i class="fa-solid fa-triangle-exclamation"></i>
+<h4>Pending Exceptions</h4>
+<p>2 Active Cases</p>
+</div>
+
+<div class="box">
+<i class="fa-solid fa-circle-check"></i>
+<h4>Resolved Today</h4>
+<p>5 Cases Closed</p>
+</div>
+
+<div class="box">
+<i class="fa-solid fa-clock"></i>
+<h4>Average Resolution</h4>
+<p>12 Minutes</p>
+</div>
+
+<div class="box">
+<i class="fa-solid fa-shield"></i>
+<h4>Audit Coverage</h4>
+<p>100% Recorded</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- COMMON EXCEPTIONS -->
+
+<div class="card">
+
+<div class="card-title">
+<i class="fa-solid fa-list"></i>
+Common Real-Life Scenarios
+</div>
+
+<div class="grid">
+
+<div class="box">
+<i class="fa-solid fa-moon"></i>
+<h4>Night Arrival</h4>
+<p>Vehicle arrived after auction. Sell using estimated rate and update automatically after next day's auction.</p>
+</div>
+
+<div class="box">
+<i class="fa-solid fa-arrow-right-arrow-left"></i>
+<h4>Allocation Change</h4>
+<p>Move boxes between customers while preserving complete history.</p>
+</div>
+
+<div class="box">
+<i class="fa-solid fa-box-open"></i>
+<h4>Unsold Stock</h4>
+<p>Carry forward remaining stock for next day's auction.</p>
+</div>
+
+<div class="box">
+<i class="fa-solid fa-ban"></i>
+<h4>Customer Cancellation</h4>
+<p>Release allocated stock and make it available again.</p>
+</div>
+
+<div class="box">
+<i class="fa-solid fa-burst"></i>
+<h4>Damaged Tomatoes</h4>
+<p>Reduce available stock without changing original inward quantity.</p>
+</div>
+
+<div class="box">
+<i class="fa-solid fa-pencil"></i>
+<h4>Rate Correction</h4>
+<p>Supervisor-approved rate correction with full audit history.</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- LIVE EXCEPTIONS -->
+
+<div class="card">
+
+<div class="card-title">
+<i class="fa-solid fa-table-list"></i>
+Live Exception Register
+</div>
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Vehicle</th>
+<th>Exception</th>
+<th>Owner</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td>EX-001</td>
+<td>TN72 AB1234</td>
+<td>Night Arrival</td>
+<td>Murugan</td>
+<td><span class="status orange">Pending</span></td>
+</tr>
+
+<tr>
+<td>EX-002</td>
+<td>KA03 GH3456</td>
+<td>Allocation Change</td>
+<td>Supervisor</td>
+<td><span class="status blue">In Progress</span></td>
+</tr>
+
+<tr>
+<td>EX-003</td>
+<td>TN58 EF9012</td>
+<td>Damaged Stock</td>
+<td>Murugan</td>
+<td><span class="status green">Resolved</span></td>
+</tr>
+
+</table>
+
+</div>
+
+<!-- DECISION GUIDE -->
+
+<div class="card">
+
+<div class="card-title">
+<i class="fa-solid fa-code-branch"></i>
+Exception Decision Guide
+</div>
+
+<div class="grid">
+
+<div class="box">
+<h4>Rate Changed?</h4>
+<p>Update bills, supplier settlement and profit reports automatically.</p>
+</div>
+
+<div class="box">
+<h4>Quantity Changed?</h4>
+<p>Adjust stock and regenerate draft bills.</p>
+</div>
+
+<div class="box">
+<h4>Allocation Changed?</h4>
+<p>Create a new history record instead of overwriting.</p>
+</div>
+
+<div class="box">
+<h4>Purchase Approved?</h4>
+<p>Only Super Admin can reopen with authorization.</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- AUTOMATIC IMPACT -->
+
+<div class="card">
+
+<div class="card-title">
+<i class="fa-solid fa-diagram-project"></i>
+Automatic ERP Response
+</div>
+
+<table>
+
+<tr>
+<th>Trigger</th>
+<th>Automatic Update</th>
+</tr>
+
+<tr>
+<td>Rate Updated</td>
+<td>Draft Bills + Supplier Settlement + Profit Reports</td>
+</tr>
+
+<tr>
+<td>Damage Added</td>
+<td>Available Stock + Audit Log</td>
+</tr>
+
+<tr>
+<td>Carry Forward</td>
+<td>Next Day Stock Link</td>
+</tr>
+
+<tr>
+<td>Allocation Modified</td>
+<td>Allocation History + Bills</td>
+</tr>
+
+<tr>
+<td>Approval Reopened</td>
+<td>Audit Timeline Updated</td>
+</tr>
+
+</table>
+
+</div>
+
+<!-- BUSINESS RULES -->
+
+<div class="card">
+
+<div class="card-title">
+<i class="fa-solid fa-shield-halved"></i>
+Business Rules
+</div>
+
+<div class="grid">
+
+<div class="box">
+<p>Original inward quantity is never deleted.</p>
+</div>
+
+<div class="box">
+<p>Every exception creates an audit record.</p>
+</div>
+
+<div class="box">
+<p>Rate corrections require authorization.</p>
+</div>
+
+<div class="box">
+<p>Approved purchases cannot be edited directly.</p>
+</div>
+
+<div class="box">
+<p>Carry-forward stock remains linked to the original purchase.</p>
+</div>
+
+<div class="box">
+<p>Profit reports update automatically after approved changes.</p>
+</div>
+
+</div>
+
+<div class="alert">
+
+<b>Gap Analysis Covered:</b> This page ensures the ERP supports real-life mandi operations instead of only ideal workflows, exactly matching the client's final scope requirement.
+
+</div>
+
+</div>
+
+<!-- ACTIONS -->
+
+<div class="card">
+
+<div class="card-title">
+<i class="fa-solid fa-play"></i>
+Module Actions
+</div>
+
+<div class="actions">
+
+<button class="btn secondary"
+onclick="window.location.href='audit-timeline.html'">
+Back
+</button>
+
+<button class="btn gold">
+Raise Exception
+</button>
+
+<button class="btn primary"
+onclick="window.location.href='../billing/index.html'">
+Finish Module 1
+</button>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Allocation History | Sri Varahi ERP</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+:root{
+--red:#B22222;
+--green:#1E5A33;
+--gold:#C89A2B;
+--cream:#F8F6F1;
+--sidebar:#0F2C1E;
+--sidebar2:#143524;
+--border:#E6DED2;
+--green-light:#DDE9D9;
+--text:#222;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body{background:var(--cream);overflow:hidden;color:var(--text);}
+
+/* HEADER */
+.header{
+height:82px;
+background:white;
+border-bottom:3px solid var(--gold);
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:12px 24px;
+}
+
+.brand{display:flex;align-items:center;gap:15px;}
+.logo{width:72px;height:72px;object-fit:contain;}
+
+.brand h1{
+font-family:Merriweather,serif;
+font-size:24px;
+color:var(--red);
+}
+
+.brand p{
+font-size:13px;
+color:var(--green);
+font-weight:600;
+}
+
+.header-right{
+display:flex;
+align-items:center;
+gap:20px;
+}
+
+.avatar{
+width:42px;
+height:42px;
+border-radius:50%;
+background:var(--green);
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-weight:bold;
+}
+
+/* LAYOUT */
+
+.container{
+display:flex;
+height:calc(100vh - 82px);
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:260px;
+background:linear-gradient(180deg,var(--sidebar),var(--sidebar2));
+color:white;
+padding:18px 14px;
+overflow:auto;
+}
+
+.section-title{
+font-size:11px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:#B8C5AE;
+margin:18px 10px 10px;
+}
+
+.menu-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:13px 14px;
+border-radius:12px;
+cursor:pointer;
+margin-bottom:5px;
+transition:.2s;
+}
+
+.menu-item:hover{
+background:rgba(255,255,255,.08);
+}
+
+.menu-item.active{
+background:var(--green-light);
+color:var(--green);
+font-weight:600;
+}
+
+.menu-left{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.submenu{
+padding-left:18px;
+}
+
+.submenu a{
+display:flex;
+align-items:center;
+gap:10px;
+padding:9px 12px;
+margin:3px 0;
+border-radius:8px;
+text-decoration:none;
+color:#E7F0E5;
+font-size:14px;
+}
+
+.submenu a i{
+color:var(--gold);
+font-size:12px;
+width:18px;
+}
+
+.submenu a.active{
+background:rgba(200,154,43,.15);
+border-left:3px solid var(--gold);
+color:white;
+}
+
+.submenu a:hover{
+background:rgba(255,255,255,.08);
+}
+
+.divider{
+height:1px;
+background:rgba(255,255,255,.1);
+margin:12px 8px;
+}
+
+/* CONTENT */
+
+.content{
+flex:1;
+padding:24px;
+overflow:auto;
+}
+
+.breadcrumb{
+font-size:14px;
+color:#777;
+margin-bottom:8px;
+}
+
+.page-title{
+font-size:36px;
+color:var(--red);
+margin-bottom:6px;
+}
+
+.subtitle{
+color:#666;
+margin-bottom:24px;
+}
+
+/* CARDS */
+
+.card{
+background:white;
+border-radius:18px;
+padding:22px;
+border:1px solid var(--border);
+margin-bottom:22px;
+box-shadow:0 4px 12px rgba(0,0,0,.05);
+}
+
+.card-title{
+font-size:22px;
+color:var(--green);
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:18px;
+}
+
+.card-title i{
+color:var(--gold);
+}
+
+/* GRID */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:16px;
+}
+
+.box{
+background:#FAFAF8;
+border:1px solid var(--border);
+border-radius:12px;
+padding:16px;
+}
+
+.box h4{
+font-size:13px;
+color:#666;
+margin-bottom:6px;
+}
+
+.box p{
+font-size:18px;
+font-weight:600;
+}
+
+/* TABLE */
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:12px;
+}
+
+th{
+background:#F5F5F2;
+padding:12px;
+text-align:left;
+font-size:13px;
+}
+
+td{
+padding:12px;
+border-bottom:1px solid #eee;
+}
+
+.status{
+padding:5px 10px;
+border-radius:999px;
+font-size:12px;
+font-weight:600;
+display:inline-block;
+}
+
+.green{background:#DFF4E4;color:#166534;}
+.orange{background:#FFF8E1;color:#9A6A00;}
+.blue{background:#E8F1FF;color:#1E40AF;}
+
+/* TIMELINE */
+
+.timeline{
+border-left:3px solid var(--gold);
+padding-left:20px;
+position:relative;
+}
+
+.event{
+position:relative;
+margin-bottom:22px;
+}
+
+.event::before{
+content:"";
+position:absolute;
+left:-29px;
+top:4px;
+width:12px;
+height:12px;
+background:var(--green);
+border-radius:50%;
+border:3px solid white;
+box-shadow:0 0 0 2px var(--gold);
+}
+
+.event h4{
+color:var(--green);
+font-size:15px;
+margin-bottom:4px;
+}
+
+.event p{
+font-size:13px;
+color:#666;
+}
+
+/* COMPARISON */
+
+.compare{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+.compare-box{
+border:1px solid var(--border);
+border-radius:12px;
+padding:16px;
+background:#FAFAF8;
+}
+
+.compare-box h4{
+color:var(--green);
+margin-bottom:12px;
+}
+
+/* BUTTON */
+
+.actions{
+display:flex;
+justify-content:flex-end;
+gap:12px;
+flex-wrap:wrap;
+margin-top:22px;
+}
+
+.btn{
+padding:12px 20px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-weight:600;
+}
+
+.primary{background:var(--green);color:white;}
+.secondary{background:white;border:2px solid var(--green);color:var(--green);}
+.gold{background:var(--gold);color:white;}
+
+/* STEPPER */
+
+.steps{
+display:flex;
+justify-content:space-between;
+position:relative;
+margin-top:10px;
+}
+
+.steps::before{
+content:"";
+position:absolute;
+left:35px;
+right:35px;
+top:18px;
+height:3px;
+background:#ddd;
+z-index:0;
+}
+
+.step{
+text-align:center;
+position:relative;
+z-index:1;
+font-size:12px;
+}
+
+.step span{
+width:36px;
+height:36px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+background:#ddd;
+margin:auto;
+margin-bottom:8px;
+}
+
+.step.done span{
+background:var(--green);
+color:white;
+}
+
+.step.active span{
+background:var(--red);
+color:white;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.sidebar{display:none;}
+.container{display:block;}
+.content{padding:16px;}
+.page-title{font-size:30px;}
+
+.header{padding:10px 14px;}
+.logo{width:54px;height:54px;}
+
+.brand h1{font-size:17px;}
+.brand p{font-size:11px;}
+
+.header-right{font-size:12px;gap:10px;}
+.avatar{width:36px;height:36px;}
+
+table{
+display:block;
+overflow-x:auto;
+white-space:nowrap;
+}
+
+.compare{
+grid-template-columns:1fr;
+}
+
+.steps{
+overflow-x:auto;
+gap:20px;
+padding-bottom:10px;
+}
+
+.steps::before{display:none;}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+<div class="brand">
+<img src="../logo.png" class="logo">
+<div>
+<h1>SRI VARAHI TOMATO COMMISSION MANDI</h1>
+<p>Wholesale & Retail Sales | Intra & Inter State Sales | Logistics</p>
+</div>
+</div>
+
+<div class="header-right">
+<div><i class="fa-regular fa-calendar"></i> Today</div>
+<div style="display:flex;align-items:center;gap:10px;">
+<div class="avatar">AD</div>
+<div><b>Admin</b><br><small>Head Office</small></div>
+</div>
+</div>
+
+</header>
+
+<div class="container">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+<div class="menu-item" onclick="window.location.href='../index.html'">
+<div class="menu-left"><i class="fa-solid fa-house"></i><span>Dashboard</span></div>
+</div>
+
+<div class="section-title">Modules</div>
+
+<div class="menu-item active">
+<div class="menu-left"><i class="fa-solid fa-truck"></i><span>Procurement</span></div>
+<i class="fa-solid fa-chevron-right" style="transform:rotate(90deg);"></i>
+</div>
+
+<div class="submenu">
+
+<a href="vehicle-entry.html"><i class="fa-solid fa-circle-dot"></i>Vehicle Entry</a>
+<a href="workflow-selection.html"><i class="fa-solid fa-circle-dot"></i>Workflow Selection</a>
+<a href="auction-management.html"><i class="fa-solid fa-circle-dot"></i>Auction Management</a>
+<a href="customer-allocation.html"><i class="fa-solid fa-circle-dot"></i>Customer Allocation</a>
+<a href="draft-bills.html"><i class="fa-solid fa-circle-dot"></i>Draft Bills</a>
+<a href="stock-management.html"><i class="fa-solid fa-circle-dot"></i>Stock Management</a>
+<a href="unsold-stock.html"><i class="fa-solid fa-circle-dot"></i>Unsold Stock</a>
+<a href="allocation-history.html" class="active"><i class="fa-solid fa-circle-dot"></i>Allocation History</a>
+<a href="approval.html"><i class="fa-solid fa-circle-dot"></i>Approval</a>
+<a href="whatsapp.html"><i class="fa-brands fa-whatsapp"></i>WhatsApp</a>
+<a href="audit-timeline.html"><i class="fa-solid fa-clock-rotate-left"></i>Audit Timeline</a>
+<a href="exceptions.html"><i class="fa-solid fa-triangle-exclamation"></i>Exception Scenarios</a>
+
+</div>
+
+<div class="menu-item"><div class="menu-left"><i class="fa-solid fa-file-invoice-dollar"></i><span>Billing</span></div></div>
+<div class="menu-item"><div class="menu-left"><i class="fa-solid fa-wallet"></i><span>Cash Management</span></div></div>
+<div class="menu-item"><div class="menu-left"><i class="fa-solid fa-users"></i><span>Employee Settlement</span></div></div>
+<div class="menu-item"><div class="menu-left"><i class="fa-solid fa-route"></i><span>Transportation</span></div></div>
+<div class="menu-item"><div class="menu-left"><i class="fa-solid fa-chart-column"></i><span>Audit & Accounts</span></div></div>
+
+<div class="divider"></div>
+
+<div class="section-title">System</div>
+<div class="menu-item"><div class="menu-left"><i class="fa-solid fa-gear"></i><span>Settings</span></div></div>
+
+</aside>
+
+<!-- CONTENT -->
+
+<main class="content">
+
+<div class="breadcrumb">
+Dashboard / Procurement / Allocation History
+</div>
+
+<h2 class="page-title">Allocation History & Audit Trail</h2>
+
+<p class="subtitle">
+Every allocation change is permanently recorded with the user, time, reason and quantity changes to ensure complete business traceability.
+</p>
+
+<!-- SUMMARY -->
+
+<div class="card">
+
+<div class="card-title">
+<i class="fa-solid fa-clock-rotate-left"></i>
+Allocation Summary
+</div>
+
+<div class="grid">
+
+<div class="box">
+<h4>Vehicle</h4>
+<p>TN72 AB1234</p>
+</div>
+
+<div class="box">
+<h4>Supplier</h4>
+<p>Ramesh Farmer</p>
+</div>
+
+<div class="box">
+<h4>Total Allocation Events</h4>
+<p>8</p>
+</div>
+
+<div class="box">
+<h4>Latest Change</h4>
+<p>07:24 AM</p>
+</div>
+
+<div class="box">
+<h4>Current Status</h4>
+<p><span class="status green">Completed</span></p>
+</div>
+
+<div class="box">
+<h4>Audit</h4>
+<p>Fully Preserved</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- BEFORE AFTER -->
+
+<div class="card">
+
+<div class="card-title">
+<i class="fa-solid fa-arrow-right-arrow-left"></i>
+Before vs After Allocation
+</div>
+
+<div class="compare">
+
+<div class="compare-box">
+
+<h4>Original Allocation</h4>
+
+<table>
+
+<tr><th>Customer</th><th>Boxes</th></tr>
+
+<tr><td>Siva Traders</td><td>80</td></tr>
+<tr><td>Arun Stores</td><td>25</td></tr>
+
+</table>
+
+</div>
+
+<div class="compare-box">
+
+<h4>Current Allocation</h4>
+
+<table>
+
+<tr><th>Customer</th><th>Boxes</th></tr>
+
+<tr><td>Siva Traders</td><td>70</td></tr>
+<tr><td>Arun Stores</td><td>35</td></tr>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- CHANGE LOG -->
+
+<div class="card">
+
+<div class="card-title">
+<i class="fa-solid fa-list-check"></i>
+Allocation Change Log
+</div>
+
+<table>
+
+<tr>
+<th>Time</th>
+<th>User</th>
+<th>Action</th>
+<th>Reason</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td>07:15 AM</td>
+<td>Murugan</td>
+<td>Initial Allocation</td>
+<td>Auction Completed</td>
+<td><span class="status green">Completed</span></td>
+</tr>
+
+<tr>
+<td>07:18 AM</td>
+<td>Murugan</td>
+<td>Added 10 Boxes</td>
+<td>Customer Request</td>
+<td><span class="status blue">Updated</span></td>
+</tr>
+
+<tr>
+<td>07:21 AM</td>
+<td>Supervisor</td>
+<td>Transferred 10 Boxes</td>
+<td>Stock Reallocation</td>
+<td><span class="status blue">Updated</span></td>
+</tr>
+
+<tr>
+<td>07:24 AM</td>
+<td>Supervisor</td>
+<td>Approved Allocation</td>
+<td>Final Review</td>
+<td><span class="status green">Approved</span></td>
+</tr>
+
+</table>
+
+</div>
+
+<!-- TIMELINE -->
+
+<div class="card">
+
+<div class="card-title">
+<i class="fa-solid fa-timeline"></i>
+Allocation Timeline
+</div>
+
+<div class="timeline">
+
+<div class="event">
+<h4>07:15 AM — Initial Allocation</h4>
+<p>80 boxes allocated to Siva Traders immediately after auction.</p>
+</div>
+
+<div class="event">
+<h4>07:18 AM — Customer Request</h4>
+<p>Siva Traders reduced purchase by 10 boxes.</p>
+</div>
+
+<div class="event">
+<h4>07:20 AM — Reallocation</h4>
+<p>The released 10 boxes were reassigned to Arun Stores.</p>
+</div>
+
+<div class="event">
+<h4>07:24 AM — Supervisor Approval</h4>
+<p>Allocation verified before Draft Bill generation.</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- STOCK RELATION -->
+
+<div class="card">
+
+<div class="card-title">
+<i class="fa-solid fa-link"></i>
+Allocation Relationship Tracking
+</div>
+
+<table>
+
+<tr>
+<th>Supplier</th>
+<th>Original Qty</th>
+<th>Current Allocated</th>
+<th>Remaining</th>
+<th>Linked Bills</th>
+</tr>
+
+<tr>
+<td>Ramesh Farmer</td>
+<td>160</td>
+<td>105</td>
+<td>55</td>
+<td>3 Draft Bills</td>
+</tr>
+
+</table>
+
+</div>
+
+<!-- RULES -->
+
+<div class="card">
+
+<div class="card-title">
+<i class="fa-solid fa-shield-halved"></i>
+Business Rules
+</div>
+
+<div class="grid">
+
+<div class="box">
+<p>Original allocation is never deleted.</p>
+</div>
+
+<div class="box">
+<p>Every modification creates a new history record.</p>
+</div>
+
+<div class="box">
+<p>User, time and reason are mandatory.</p>
+</div>
+
+<div class="box">
+<p>Draft Bills remain linked to allocation history.</p>
+</div>
+
+<div class="box">
+<p>Supervisor approvals are recorded permanently.</p>
+</div>
+
+<div class="box">
+<p>Complete audit trail is maintained.</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- PROGRESS -->
+
+<div class="card">
+
+<div class="card-title">
+<i class="fa-solid fa-list-check"></i>
+Procurement Progress
+</div>
+
+<div class="steps">
+
+<div class="step done"><span><i class="fa-solid fa-check"></i></span>Vehicle</div>
+<div class="step done"><span><i class="fa-solid fa-check"></i></span>Workflow</div>
+<div class="step done"><span><i class="fa-solid fa-check"></i></span>Auction</div>
+<div class="step done"><span><i class="fa-solid fa-check"></i></span>Allocate</div>
+<div class="step done"><span><i class="fa-solid fa-check"></i></span>Bills</div>
+<div class="step done"><span><i class="fa-solid fa-check"></i></span>Stock</div>
+
+</div>
+
+<div class="actions">
+
+<button class="btn secondary"
+onclick="window.location.href='unsold-stock.html'">
+Back
+</button>
+
+<button class="btn primary"
+onclick="window.location.href='approval.html'">
+Continue to Approval
+</button>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+</body>
+</html>

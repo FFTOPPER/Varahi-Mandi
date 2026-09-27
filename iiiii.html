@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sri Varahi ERP</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+:root{
+--red:#B22222;
+--green:#1E5A33;
+--green-light:#DDE9D9;
+--gold:#C89A2B;
+--cream:#F8F6F1;
+--sidebar:#0F2C1E;
+--sidebar2:#143524;
+--border:#E6DED2;
+--text:#222;
+--white:#fff;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:var(--cream);
+overflow:hidden;
+color:var(--text);
+}
+
+/* HEADER */
+
+.header{
+
+height:82px;
+background:white;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:12px 24px;
+border-bottom:3px solid var(--gold);
+position:relative;
+z-index:1200;
+
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+.logo{
+width:72px;
+}
+
+.brand h1{
+font-family:Merriweather,serif;
+font-size:25px;
+color:var(--red);
+}
+
+.brand p{
+color:var(--green);
+font-weight:600;
+font-size:14px;
+}
+
+.menu-toggle{
+display:none;
+width:42px;
+height:42px;
+border:none;
+background:var(--green);
+color:white;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
+}
+
+.header-right{
+display:flex;
+align-items:center;
+gap:22px;
+font-size:14px;
+}
+
+.profile{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.avatar{
+width:42px;
+height:42px;
+border-radius:50%;
+background:var(--green);
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-weight:600;
+}
+
+/* OVERLAY */
+
+.overlay{
+position:fixed;
+top:82px;
+left:0;
+right:0;
+bottom:0;
+background:rgba(0,0,0,.35);
+display:none;
+z-index:999;
+}
+
+.overlay.show{
+display:block;
+}
+
+/* LAYOUT */
+
+.container{
+display:flex;
+height:calc(100vh - 82px);
+}
+
+/* SIDEBAR */
+
+.sidebar{
+
+width:260px;
+background:linear-gradient(180deg,var(--sidebar),var(--sidebar2));
+color:white;
+padding:18px 14px;
+overflow:auto;
+flex-shrink:0;
+
+}
+
+.sidebar::-webkit-scrollbar{
+width:5px;
+}
+
+.sidebar::-webkit-scrollbar-thumb{
+background:rgba(255,255,255,.15);
+border-radius:10px;
+}
+
+.section-title{
+
+font-size:11px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:#B8C5AE;
+margin:18px 10px 10px;
+
+}
+
+.menu-item{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:13px 14px;
+border-radius:12px;
+cursor:pointer;
+transition:.25s;
+margin-bottom:6px;
+
+}
+
+.menu-item:hover{
+background:rgba(255,255,255,.08);
+}
+
+.menu-item.active{
+background:var(--green-light);
+color:var(--green);
+font-weight:600;
+}
+
+.menu-left{
+display:flex;
+align-items:center;
+gap:12px;
+white-space:nowrap;
+}
+
+.menu-left i{
+width:18px;
+text-align:center;
+}
+
+.divider{
+height:1px;
+background:rgba(255,255,255,.1);
+margin:14px 8px;
+}
+
+.logout{
+margin-top:auto;
+border:1px solid rgba(255,255,255,.2);
+}
+
+/* CONTENT */
+
+.content{
+
+flex:1;
+padding:24px;
+overflow:auto;
+
+}
+
+.breadcrumb{
+font-size:14px;
+color:#777;
+margin-bottom:8px;
+}
+
+.top-row{
+
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+gap:20px;
+margin-bottom:22px;
+
+}
+
+.top-row h2{
+font-size:38px;
+color:var(--red);
+}
+
+.top-row p{
+color:#666;
+margin-top:5px;
+}
+
+.actions{
+display:flex;
+gap:12px;
+}
+
+.btn{
+
+padding:12px 20px;
+border-radius:12px;
+border:none;
+cursor:pointer;
+font-weight:600;
+display:flex;
+align-items:center;
+gap:8px;
+
+}
+
+.btn.primary{
+background:var(--green);
+color:white;
+}
+
+.btn.secondary{
+background:white;
+border:2px solid var(--green);
+color:var(--green);
+}
+
+/* CARDS */
+
+.cards{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:18px;
+margin-bottom:24px;
+
+}
+
+.card{
+
+background:white;
+border-radius:18px;
+padding:20px;
+border:1px solid var(--border);
+border-top:4px solid var(--green);
+box-shadow:0 4px 12px rgba(0,0,0,.05);
+
+}
+
+.card-top{
+
+display:flex;
+justify-content:space-between;
+margin-bottom:15px;
+
+}
+
+.icon-circle{
+
+width:44px;
+height:44px;
+border-radius:50%;
+background:#E8F4EA;
+display:flex;
+align-items:center;
+justify-content:center;
+color:var(--green);
+
+}
+
+.card h3{
+font-size:15px;
+margin-bottom:8px;
+}
+
+.value{
+font-size:34px;
+font-weight:700;
+color:var(--red);
+}
+
+.card small{
+color:#777;
+}
+
+/* PANELS */
+
+.grid{
+
+display:grid;
+grid-template-columns:1.4fr .8fr;
+gap:20px;
+
+}
+
+.panel{
+
+background:white;
+border-radius:18px;
+padding:20px;
+border:1px solid var(--border);
+box-shadow:0 4px 12px rgba(0,0,0,.04);
+
+}
+
+.panel-header{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:18px;
+
+}
+
+.panel-header a{
+color:var(--green);
+font-weight:600;
+text-decoration:none;
+}
+
+table{
+
+width:100%;
+border-collapse:collapse;
+
+}
+
+th{
+
+background:#F5F5F2;
+padding:12px;
+text-align:left;
+font-size:14px;
+
+}
+
+td{
+
+padding:12px;
+border-bottom:1px solid #eee;
+font-size:14px;
+
+}
+
+.badge{
+
+padding:5px 10px;
+border-radius:999px;
+font-size:12px;
+font-weight:600;
+
+}
+
+.success{background:#DFF4E4;color:#166534;}
+.warning{background:#FDF0C5;color:#A16207;}
+.danger{background:#FDE2E2;color:#B91C1C;}
+
+/* STEPPER */
+
+.stepper{
+
+margin-top:22px;
+background:white;
+border-radius:18px;
+padding:22px;
+border:1px solid var(--border);
+
+}
+
+.steps{
+
+display:flex;
+justify-content:space-between;
+gap:10px;
+position:relative;
+
+}
+
+.steps::before{
+
+content:"";
+position:absolute;
+left:35px;
+right:35px;
+top:18px;
+height:3px;
+background:#ddd;
+
+}
+
+.step{
+
+text-align:center;
+position:relative;
+z-index:2;
+font-size:12px;
+min-width:70px;
+
+}
+
+.step span{
+
+display:flex;
+align-items:center;
+justify-content:center;
+width:36px;
+height:36px;
+border-radius:50%;
+background:#ECECEC;
+margin:auto;
+margin-bottom:8px;
+
+}
+
+.step.done span{
+background:var(--green);
+color:white;
+}
+
+.step.active span{
+background:var(--red);
+color:white;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1200px){
+
+.grid{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:992px){
+
+.menu-toggle{
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.sidebar{
+
+position:fixed;
+top:82px;
+left:-270px;
+height:calc(100vh - 82px);
+transition:.3s;
+z-index:1000;
+box-shadow:8px 0 25px rgba(0,0,0,.2);
+
+}
+
+.sidebar.show{
+left:0;
+}
+
+.cards{
+grid-template-columns:repeat(2,1fr);
+}
+
+.top-row{
+flex-direction:column;
+}
+
+.actions{
+width:100%;
+}
+
+.btn{
+flex:1;
+justify-content:center;
+}
+
+}
+
+@media(max-width:768px){
+
+.header{
+
+padding:12px;
+height:auto;
+flex-wrap:wrap;
+gap:12px;
+
+}
+
+.brand{
+flex:1;
+}
+
+.logo{
+width:56px;
+}
+
+.brand h1{
+font-size:18px;
+line-height:1.3;
+}
+
+.brand p{
+font-size:12px;
+}
+
+.header-right{
+
+width:100%;
+justify-content:space-between;
+
+}
+
+.content{
+padding:16px;
+}
+
+.top-row h2{
+font-size:28px;
+}
+
+.cards{
+grid-template-columns:1fr;
+}
+
+.actions{
+flex-direction:column;
+}
+
+.grid{
+grid-template-columns:1fr;
+}
+
+table{
+display:block;
+overflow-x:auto;
+white-space:nowrap;
+}
+
+.steps{
+
+overflow-x:auto;
+padding-bottom:8px;
+
+}
+
+.steps::before{
+display:none;
+}
+
+}
+
+@media(max-width:430px){
+
+.brand h1{
+font-size:16px;
+}
+
+.brand p{
+font-size:11px;
+}
+
+.avatar{
+width:36px;
+height:36px;
+}
+
+.value{
+font-size:30px;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<header class="header">
+
+<button class="menu-toggle" onclick="toggleSidebar()">
+<i class="fa-solid fa-bars"></i>
+</button>
+
+<div class="brand">
+
+<img src="logo.png" class="logo">
+
+<div>
+<h1>SRI VARAHI TOMATO COMMISSION MANDI</h1>
+<p>Wholesale & Retail Sales | Intra & Inter State Sales | Logistics</p>
+</div>
+
+</div>
+
+<div class="header-right">
+
+<div><i class="fa-regular fa-calendar"></i> Today</div>
+
+<div class="profile">
+<div class="avatar">AD</div>
+<div>
+<b>Admin</b><br>
+<small>Head Office</small>
+</div>
+</div>
+
+</div>
+
+</header>
+
+<div class="overlay" onclick="toggleSidebar()"></div>
+
+<div class="container">
+
+<aside class="sidebar">
+
+<div class="menu-item active">
+<div class="menu-left">
+<i class="fa-solid fa-house"></i>
+<span>Dashboard</span>
+</div>
+</div>
+
+<div class="section-title">Modules</div>
+
+<div class="menu-item"><div class="menu-left"><i class="fa-solid fa-truck"></i><span>Procurement</span></div><i class="fa-solid fa-chevron-right"></i></div>
+
+<div class="menu-item"><div class="menu-left"><i class="fa-solid fa-file-invoice-dollar"></i><span>Billing</span></div><i class="fa-solid fa-chevron-right"></i></div>
+
+<div class="menu-item"><div class="menu-left"><i class="fa-solid fa-wallet"></i><span>Cash Management</span></div><i class="fa-solid fa-chevron-right"></i></div>
+
+<div class="menu-item"><div class="menu-left"><i class="fa-solid fa-users"></i><span>Employee Settlement</span></div><i class="fa-solid fa-chevron-right"></i></div>
+
+<div class="menu-item"><div class="menu-left"><i class="fa-solid fa-route"></i><span>Transportation</span></div><i class="fa-solid fa-chevron-right"></i></div>
+
+<div class="menu-item"><div class="menu-left"><i class="fa-solid fa-chart-column"></i><span>Audit & Accounts</span></div><i class="fa-solid fa-chevron-right"></i></div>
+
+<div class="divider"></div>
+
+<div class="section-title">System</div>
+
+<div class="menu-item"><div class="menu-left"><i class="fa-solid fa-file-lines"></i><span>Reports</span></div></div>
+
+<div class="menu-item"><div class="menu-left"><i class="fa-solid fa-database"></i><span>Master Data</span></div></div>
+
+<div class="menu-item"><div class="menu-left"><i class="fa-solid fa-gear"></i><span>Settings</span></div></div>
+
+<div class="menu-item logout">
+<div class="menu-left"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></div>
+</div>
+
+</aside>
+
+<main class="content">
+
+<div class="breadcrumb">Dashboard</div>
+
+<div class="top-row">
+
+<div>
+<h2>Today's Operations</h2>
+<p>Overview of today's procurement, auction, sales and operations.</p>
+</div>
+
+<div class="actions">
+<button class="btn primary"><i class="fa-solid fa-plus"></i> New Vehicle</button>
+<button class="btn secondary"><i class="fa-solid fa-gavel"></i> Auction</button>
+</div>
+
+</div>
+
+<div class="cards">
+
+<div class="card">
+<div class="card-top"><div class="icon-circle"><i class="fa-solid fa-truck"></i></div></div>
+<h3>Vehicles Arrived</h3>
+<div class="value">18</div>
+<small>Today's inward</small>
+</div>
+
+<div class="card">
+<div class="card-top"><div class="icon-circle"><i class="fa-solid fa-boxes-stacked"></i></div></div>
+<h3>Boxes Received</h3>
+<div class="value">1,240</div>
+<small>Total received</small>
+</div>
+
+<div class="card">
+<div class="card-top"><div class="icon-circle"><i class="fa-solid fa-gavel"></i></div></div>
+<h3>Pending Auctions</h3>
+<div class="value">5</div>
+<small>In progress</small>
+</div>
+
+<div class="card">
+<div class="card-top"><div class="icon-circle"><i class="fa-solid fa-file-lines"></i></div></div>
+<h3>Draft Bills</h3>
+<div class="value">27</div>
+<small>Awaiting approval</small>
+</div>
+
+<div class="card">
+<div class="card-top"><div class="icon-circle"><i class="fa-solid fa-warehouse"></i></div></div>
+<h3>Pending Stock</h3>
+<div class="value">86</div>
+<small>Carry forward</small>
+</div>
+
+<div class="card">
+<div class="card-top"><div class="icon-circle"><i class="fa-solid fa-circle-check"></i></div></div>
+<h3>Approved Purchases</h3>
+<div class="value">13</div>
+<small>Completed</small>
+</div>
+
+</div>
+
+<div class="grid">
+
+<div class="panel">
+
+<div class="panel-header">
+<h3>Recent Vehicle Entries</h3>
+<a href="#">View All</a>
+</div>
+
+<table>
+
+<tr>
+<th>Vehicle</th>
+<th>Supplier</th>
+<th>Boxes</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td>TN72 AB1234</td>
+<td>Ramesh</td>
+<td>120</td>
+<td><span class="badge success">Auctioned</span></td>
+</tr>
+
+<tr>
+<td>KL01 CD5678</td>
+<td>Mani Traders</td>
+<td>85</td>
+<td><span class="badge warning">Allocation</span></td>
+</tr>
+
+<tr>
+<td>TN58 EF9012</td>
+<td>Kumar</td>
+<td>200</td>
+<td><span class="badge danger">Pending</span></td>
+</tr>
+
+<tr>
+<td>KA03 GH3456</td>
+<td>Sri Traders</td>
+<td>150</td>
+<td><span class="badge success">Approved</span></td>
+</tr>
+
+</table>
+
+</div>
+
+<div class="panel">
+
+<div class="panel-header">
+<h3>Stock Summary</h3>
+<a href="#">Details</a>
+</div>
+
+<table>
+
+<tr><th>Grade</th><th>Pending</th></tr>
+
+<tr><td>A Grade</td><td>60</td></tr>
+
+<tr><td>B Grade</td><td>40</td></tr>
+
+<tr><td>C Grade</td><td>20</td></tr>
+
+</table>
+
+</div>
+
+</div>
+
+<div class="stepper">
+
+<h3 style="margin-bottom:18px;">Today's Auction Progress</h3>
+
+<div class="steps">
+
+<div class="step done">
+<span><i class="fa-solid fa-check"></i></span>
+Vehicle
+</div>
+
+<div class="step active">
+<span>2</span>
+Auction
+</div>
+
+<div class="step">
+<span>3</span>
+Allocate
+</div>
+
+<div class="step">
+<span>4</span>
+Bills
+</div>
+
+<div class="step">
+<span>5</span>
+Approve
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+<script>
+
+function toggleSidebar(){
+
+document.querySelector('.sidebar').classList.toggle('show');
+document.querySelector('.overlay').classList.toggle('show');
+
+}
+
+</script>
+
+</body>
+</html>
